@@ -18,6 +18,14 @@ def getWebsiteContent(URL):
 		return htmlContent
 	
 def getClickables(URL):
+
+	"""
+	TODO: getClickables can continue to return the list of metedata information in
+	dictionary format, however, in main.py, I need to open the URL page so that
+	I can then convert that metadata into locators that can be clicked using
+	.click() method. The locators will be bound to the page instance opened
+	by Playwright.
+	"""
     # 1.) Get the HTML clickable items
     # 2.) Get the JavaScript clickable items (onclick events)
 	# 3.) Get the elements that look like buttons
