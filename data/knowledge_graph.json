@@ -4,36 +4,30 @@
       "id": "home",
       "name": "Home",
       "url": "https://books.toscrape.com/index.html",
-      "visits": 1
+      "visits": 2
     },
     {
       "id": "travel_2",
       "name": "Travel 2",
       "url": "https://books.toscrape.com/catalogue/category/books/travel_2/index.html",
-      "visits": 1
-    },
-    {
-      "id": "mystery_3",
-      "name": "Mystery 3",
-      "url": "https://books.toscrape.com/catalogue/category/books/mystery_3/index.html",
-      "visits": 1
-    },
-    {
-      "id": "historical_fiction_4",
-      "name": "Historical Fiction 4",
-      "url": "https://books.toscrape.com/catalogue/category/books/historical-fiction_4/index.html",
       "visits": 2
     },
     {
-      "id": "forever_and_forever_the_courtship_of_henry_longfellow_and_fanny_appleton_894",
-      "name": "Forever And Forever The Courtship Of Henry Longfellow And Fanny Appleton 894",
-      "url": "https://books.toscrape.com/catalogue/forever-and-forever-the-courtship-of-henry-longfellow-and-fanny-appleton_894/index.html",
+      "id": "its_only_the_himalayas_981",
+      "name": "Its Only The Himalayas 981",
+      "url": "https://books.toscrape.com/catalogue/its-only-the-himalayas_981/index.html",
       "visits": 1
     },
     {
-      "id": "mrs_houdini_821",
-      "name": "Mrs Houdini 821",
-      "url": "https://books.toscrape.com/catalogue/mrs-houdini_821/index.html",
+      "id": "full_moon_over_noahs_ark_an_odyssey_to_mount_ararat_and_beyond_811",
+      "name": "Full Moon Over Noahs Ark An Odyssey To Mount Ararat And Beyond 811",
+      "url": "https://books.toscrape.com/catalogue/full-moon-over-noahs-ark-an-odyssey-to-mount-ararat-and-beyond_811/index.html",
+      "visits": 1
+    },
+    {
+      "id": "mesaerion_the_best_science_fiction_stories_1800_1849_983",
+      "name": "Mesaerion The Best Science Fiction Stories 1800 1849 983",
+      "url": "https://books.toscrape.com/catalogue/mesaerion-the-best-science-fiction-stories-1800-1849_983/index.html",
       "visits": 1
     }
   ],
@@ -45,27 +39,27 @@
     },
     {
       "from": "travel_2",
-      "to": "mystery_3",
+      "to": "its_only_the_himalayas_981",
       "count": 1
     },
     {
-      "from": "mystery_3",
-      "to": "historical_fiction_4",
+      "from": "travel_2",
+      "to": "full_moon_over_noahs_ark_an_odyssey_to_mount_ararat_and_beyond_811",
       "count": 1
     },
     {
-      "from": "historical_fiction_4",
-      "to": "forever_and_forever_the_courtship_of_henry_longfellow_and_fanny_appleton_894",
+      "from": "its_only_the_himalayas_981",
+      "to": "travel_2",
       "count": 1
     },
     {
-      "from": "historical_fiction_4",
-      "to": "mrs_houdini_821",
+      "from": "full_moon_over_noahs_ark_an_odyssey_to_mount_ararat_and_beyond_811",
+      "to": "mesaerion_the_best_science_fiction_stories_1800_1849_983",
       "count": 1
     },
     {
-      "from": "forever_and_forever_the_courtship_of_henry_longfellow_and_fanny_appleton_894",
-      "to": "historical_fiction_4",
+      "from": "mesaerion_the_best_science_fiction_stories_1800_1849_983",
+      "to": "home",
       "count": 1
     }
   ]
