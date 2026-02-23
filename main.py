@@ -86,21 +86,27 @@ def run_explorer():
 def print_help():
     """Print usage information."""
     print("""
-AutoUIExplorer - Adaptive SaaS Onboarding Framework
-====================================================
+AutoUIExplorer - Browser Navigation Tracker & Knowledge Graph Builder
+======================================================================
 
 Usage:
-  python main.py                Start the API server
-  python main.py --track [URL]  Track browsing on a website
+  python main.py                Start the API server (optional)
+  python main.py --track [URL]  Track browsing and build knowledge graph
   python main.py --explore      Legacy UI explorer mode
   python main.py --help         Show this help message
 
 Examples:
-  # Start the API server first:
-  python main.py
-  
-  # Then in another terminal, track a website:
+  # Track a website (no API needed for MVP):
   python main.py --track https://example.com
+
+What happens when tracking:
+  1. A browser window opens for you to navigate
+  2. Real-time logs show each page you visit in terminal
+  3. A knowledge graph is built as you navigate
+  4. When you close the browser:
+     - Your COMPREHENSION LEVEL is displayed
+     - The full KNOWLEDGE GRAPH is printed
+     - Graph is saved to: data/knowledge_graph.json
 """)
 
 
