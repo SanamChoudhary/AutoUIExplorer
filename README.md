@@ -2,7 +2,7 @@
 
 **Real-time browser navigation tracker with knowledge graph visualization**
 
-Built for the SABR Lab
+Built for the Motorola Solutions
 
 ---
 
@@ -64,6 +64,14 @@ After a session, find these in the `data/` folder:
 
 ## Dependencies
 
-- `playwright` — Browser automation
-- `networkx` — Graph data structure
-- `matplotlib` — Graph visualization 
+**1. Dynamic Mode (Browser Tracking)**
+Track any website in real-time. The knowledge graph is built dynamically as you browse.
+```bash
+python main.py --track https://your-app.com
+```
+
+**2. Mock Mode (for testing)**
+Use a predefined knowledge graph with the `simulate_mock.py` script.
+```bash
+python scripts/simulate_mock.py
+``` 
