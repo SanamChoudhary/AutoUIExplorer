@@ -1,11 +1,10 @@
 """
-AutoUIExplorer – main entry point.
+AutoUIExplorer – Browser Navigation Tracker
 
-Modes
------
-  python main.py                     → Start the Adaptive SaaS Onboarding API (FastAPI)
-  python main.py --track [URL]       → Launch browser tracker to explore a website
-  python main.py --explore           → Run the original UI Explorer flow (legacy)
+Usage:
+  python main.py [URL]           → Track a website
+  python main.py --track [URL]   → Track a website  
+  python main.py --help          → Show help
 """
 
 import sys
@@ -13,20 +12,6 @@ import os
 
 # Add project root to path for imports
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-
-
-def run_api():
-    """Launch the FastAPI Onboarding State API."""
-    import uvicorn
-    print("=" * 60)
-    print("  ADAPTIVE SAAS ONBOARDING - API SERVER")
-    print("=" * 60)
-    print("\n  API:  http://127.0.0.1:8000")
-    print("  Docs: http://127.0.0.1:8000/docs")
-    print("\n  To track a website, run in another terminal:")
-    print("    python main.py --track <URL>")
-    print("\n" + "=" * 60 + "\n")
-    uvicorn.run("app.api:app", host="127.0.0.1", port=8000, reload=True)
 
 
 def run_tracker(url: str | None = None):
@@ -48,41 +33,6 @@ def run_tracker(url: str | None = None):
     tracker.start(url)
 
 
-def run_explorer():
-    """Original UI Explorer flow (preserved for legacy)."""
-    from app.core import knowledge_graph as kg
-    from legacy import website_Interact as wi
-    from urllib.parse import urljoin
-
-    URL = input("Enter the URL of the website: ")
-
-    allClickables = wi.getClickables(URL)
-    print(f"Found {len(allClickables)} clickable elements on {URL}")
-
-    source_node = kg.addNode(URL, len(allClickables))
-
-    running = True
-    while running:
-        for c in allClickables:
-            if c.get("href") is not None:
-                next_clickable = c.get("href")
-            else:
-                next_clickable = None
-
-            print(f"Next clickable selected: {next_clickable}")
-
-            if next_clickable is None:
-                print("No more clickable elements with href found. Stopping navigation.")
-                running = False
-            else:
-                next_clickable.click()
-                print(f"After clicking, found clickables on next page")
-
-                target_node = kg.addNode("next_url", 0)
-                kg.addEdge(source_node, target_node, label=(c.get("text") or "click"))
-                print("Graph updated: added nodes and edge for navigation.")
-
-
 def print_help():
     """Print usage information."""
     print("""
@@ -90,23 +40,22 @@ AutoUIExplorer - Browser Navigation Tracker & Knowledge Graph Builder
 ======================================================================
 
 Usage:
-  python main.py                Start the API server (optional)
-  python main.py --track [URL]  Track browsing and build knowledge graph
-  python main.py --explore      Legacy UI explorer mode
-  python main.py --help         Show this help message
+  python main.py [URL]          Track a website
+  python main.py --track [URL]  Track a website
+  python main.py --help         Show this help
 
 Examples:
-  # Track a website (no API needed for MVP):
-  python main.py --track https://example.com
+  python main.py https://example.com
+  python main.py --track https://books.toscrape.com
 
-What happens when tracking:
-  1. A browser window opens for you to navigate
-  2. Real-time logs show each page you visit in terminal
-  3. A knowledge graph is built as you navigate
-  4. When you close the browser:
-     - Your COMPREHENSION LEVEL is displayed
-     - The full KNOWLEDGE GRAPH is printed
-     - Graph is saved to: data/knowledge_graph.json
+What happens:
+  1. Browser opens - navigate the site freely
+  2. Terminal shows real-time page visits
+  3. Close browser to see:
+     - Comprehension level
+     - Session stats  
+     - Knowledge graph visualization
+  4. Graph saved to: data/knowledge_graph.json
 """)
 
 
@@ -114,11 +63,11 @@ if __name__ == "__main__":
     if "--help" in sys.argv or "-h" in sys.argv:
         print_help()
     elif "--track" in sys.argv:
-        # Get URL from arguments if provided
         idx = sys.argv.index("--track")
         url = sys.argv[idx + 1] if idx + 1 < len(sys.argv) else None
         run_tracker(url)
-    elif "--explore" in sys.argv:
-        run_explorer()
+    elif len(sys.argv) > 1 and not sys.argv[1].startswith("-"):
+        # Direct URL argument
+        run_tracker(sys.argv[1])
     else:
-        run_api()
+        print_help()
