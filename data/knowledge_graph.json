@@ -1,0 +1,72 @@
+{
+  "nodes": [
+    {
+      "id": "home",
+      "name": "Home",
+      "url": "https://books.toscrape.com/index.html",
+      "visits": 1
+    },
+    {
+      "id": "travel_2",
+      "name": "Travel 2",
+      "url": "https://books.toscrape.com/catalogue/category/books/travel_2/index.html",
+      "visits": 1
+    },
+    {
+      "id": "mystery_3",
+      "name": "Mystery 3",
+      "url": "https://books.toscrape.com/catalogue/category/books/mystery_3/index.html",
+      "visits": 1
+    },
+    {
+      "id": "historical_fiction_4",
+      "name": "Historical Fiction 4",
+      "url": "https://books.toscrape.com/catalogue/category/books/historical-fiction_4/index.html",
+      "visits": 2
+    },
+    {
+      "id": "forever_and_forever_the_courtship_of_henry_longfellow_and_fanny_appleton_894",
+      "name": "Forever And Forever The Courtship Of Henry Longfellow And Fanny Appleton 894",
+      "url": "https://books.toscrape.com/catalogue/forever-and-forever-the-courtship-of-henry-longfellow-and-fanny-appleton_894/index.html",
+      "visits": 1
+    },
+    {
+      "id": "mrs_houdini_821",
+      "name": "Mrs Houdini 821",
+      "url": "https://books.toscrape.com/catalogue/mrs-houdini_821/index.html",
+      "visits": 1
+    }
+  ],
+  "edges": [
+    {
+      "from": "home",
+      "to": "travel_2",
+      "count": 1
+    },
+    {
+      "from": "travel_2",
+      "to": "mystery_3",
+      "count": 1
+    },
+    {
+      "from": "mystery_3",
+      "to": "historical_fiction_4",
+      "count": 1
+    },
+    {
+      "from": "historical_fiction_4",
+      "to": "forever_and_forever_the_courtship_of_henry_longfellow_and_fanny_appleton_894",
+      "count": 1
+    },
+    {
+      "from": "historical_fiction_4",
+      "to": "mrs_houdini_821",
+      "count": 1
+    },
+    {
+      "from": "forever_and_forever_the_courtship_of_henry_longfellow_and_fanny_appleton_894",
+      "to": "historical_fiction_4",
+      "count": 1
+    }
+  ]
+}
