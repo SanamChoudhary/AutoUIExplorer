@@ -13,21 +13,21 @@
       "visits": 2
     },
     {
-      "id": "its_only_the_himalayas_981",
-      "name": "Its Only The Himalayas 981",
-      "url": "https://books.toscrape.com/catalogue/its-only-the-himalayas_981/index.html",
+      "id": "mystery_3",
+      "name": "Mystery 3",
+      "url": "https://books.toscrape.com/catalogue/category/books/mystery_3/index.html",
       "visits": 1
     },
     {
-      "id": "full_moon_over_noahs_ark_an_odyssey_to_mount_ararat_and_beyond_811",
-      "name": "Full Moon Over Noahs Ark An Odyssey To Mount Ararat And Beyond 811",
-      "url": "https://books.toscrape.com/catalogue/full-moon-over-noahs-ark-an-odyssey-to-mount-ararat-and-beyond_811/index.html",
+      "id": "historical_fiction_4",
+      "name": "Historical Fiction 4",
+      "url": "https://books.toscrape.com/catalogue/category/books/historical-fiction_4/index.html",
       "visits": 1
     },
     {
-      "id": "mesaerion_the_best_science_fiction_stories_1800_1849_983",
-      "name": "Mesaerion The Best Science Fiction Stories 1800 1849 983",
-      "url": "https://books.toscrape.com/catalogue/mesaerion-the-best-science-fiction-stories-1800-1849_983/index.html",
+      "id": "romance_8",
+      "name": "Romance 8",
+      "url": "https://books.toscrape.com/catalogue/category/books/romance_8/index.html",
       "visits": 1
     }
   ],
@@ -35,30 +35,25 @@
     {
       "from": "home",
       "to": "travel_2",
+      "count": 2
+    },
+    {
+      "from": "travel_2",
+      "to": "mystery_3",
       "count": 1
     },
     {
       "from": "travel_2",
-      "to": "its_only_the_himalayas_981",
+      "to": "romance_8",
       "count": 1
     },
     {
-      "from": "travel_2",
-      "to": "full_moon_over_noahs_ark_an_odyssey_to_mount_ararat_and_beyond_811",
+      "from": "mystery_3",
+      "to": "historical_fiction_4",
       "count": 1
     },
     {
-      "from": "its_only_the_himalayas_981",
-      "to": "travel_2",
-      "count": 1
-    },
-    {
-      "from": "full_moon_over_noahs_ark_an_odyssey_to_mount_ararat_and_beyond_811",
-      "to": "mesaerion_the_best_science_fiction_stories_1800_1849_983",
-      "count": 1
-    },
-    {
-      "from": "mesaerion_the_best_science_fiction_stories_1800_1849_983",
+      "from": "historical_fiction_4",
       "to": "home",
       "count": 1
     }
