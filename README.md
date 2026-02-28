@@ -2,8 +2,6 @@
 
 **Real-time browser navigation tracker with knowledge graph visualization**
 
-Built for the Motorola Solutions
-
 ---
 
 ## What It Does
@@ -13,6 +11,10 @@ Track how users navigate any website by:
 - **Building a knowledge graph** of navigation patterns
 - **Calculating comprehension level** based on exploration depth
 - **Visualizing the graph** with matplotlib on session end
+
+## 2/28/2026
+
+This code is not MVP ready for the full-scale AutoUIExplorer, but represents a core implementation for tracking where a user is traversing in a SaaS application.
 
 ## Quick Start
 
@@ -27,7 +29,7 @@ playwright install chromium
 python main.py --track https://example.com
 ```
 
-A browser window opens. Navigate freely — your actions are logged in real-time.
+A browser window opens. Navigate freely and your actions are logged in real-time.
 
 ### 3. Close the browser
 When done, close the browser to see:
@@ -50,28 +52,39 @@ After a session, find these in the `data/` folder:
 | Proficient | 6-9 pages, 4+ paths |
 | Expert     | 10+ pages, 8+ paths |
 
+NOTE: Comprehension level is currently a placeholder until we establish a formal definition of a users comprehension.
+
 ## Project Structure
 
 ```
-├── main.py                 # Entry point
-├── requirements.txt        # Dependencies
-├── scripts/
-│   └── browser_tracker.py  # Core tracking logic
-└── data/                   # Output (auto-generated)
-    ├── knowledge_graph.json
-    └── knowledge_graph.png
+├── main.py                          # Entry point — parses CLI args, launches tracker
+├── requirements.txt                 # Python dependencies
+├── data/                            # Output (auto-generated)
+│   ├── knowledge_graph.json         #   Graph data (nodes & edges)
+│   └── knowledge_graph.png          #   Graph visualization image
+└── user_trace/                      # Core package
+    ├── __init__.py
+    ├── tracker/
+    │   ├── __init__.py
+    │   ├── browser.py               #   Orchestrator — launches Chromium, wires events
+    │   └── event_collector.py       #   Filters, deduplicates & records navigations
+    ├── graph/
+    │   ├── __init__.py
+    │   ├── knowledge_graph.py       #   Directed graph model (NetworkX) + JSON export
+    │   └── url_utils.py             #   URL normalization & feature-ID helpers
+    ├── analysis/
+    │   ├── __init__.py
+    │   └── comprehension.py         #   Comprehension-level scoring (Novice → Expert)
+    └── ui/
+        ├── __init__.py
+        ├── console.py               #   ANSI color helpers & flush-safe logging
+        └── visualizer.py            #   Matplotlib graph rendering & PNG export
 ```
 
 ## Dependencies
 
-**1. Dynamic Mode (Browser Tracking)**
-Track any website in real-time. The knowledge graph is built dynamically as you browse.
-```bash
-python main.py --track https://your-app.com
-```
-
-**2. Mock Mode (for testing)**
-Use a predefined knowledge graph with the `simulate_mock.py` script.
-```bash
-python scripts/simulate_mock.py
-``` 
+| Package | Purpose |
+|---------|---------|
+| [Playwright](https://playwright.dev/python/) | Launches and controls a real Chromium browser |
+| [NetworkX](https://networkx.org/) | Directed-graph data structure for the knowledge graph |
+| [Matplotlib](https://matplotlib.org/) | Renders the graph visualization and saves it as PNG |

@@ -1,7 +1,7 @@
 """
 Playwright browser lifecycle and event wiring.
 
-This module contains the thin BrowserTracker orchestrator that launches
+This module contains the BrowserTracker orchestrator that launches
 a Chromium browser, wires Playwright events to an EventCollector,
 and delegates analysis / visualisation to the appropriate modules.
 """
@@ -38,7 +38,6 @@ class BrowserTracker:
 
     def _data_dir(self) -> str:
         """Return the path to the data output directory."""
-        # scripts/tracker/browser.py  →  scripts/tracker  →  scripts  →  project root
         return os.path.join(
             os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
             "data"
@@ -117,7 +116,6 @@ class BrowserTracker:
 
             # Navigate to starting URL
             page.goto(start_url, wait_until="domcontentloaded")
-            # Note: The load/framenavigated event handlers will log the initial page
 
             log(f"\n  {colored('[Browser is open - navigate freely]', Colors.GREEN)}")
 
@@ -144,26 +142,3 @@ class BrowserTracker:
                 browser.close()
 
         self._print_summary()
-
-
-def main():
-    if len(sys.argv) > 1:
-        url = sys.argv[1]
-    else:
-        url = input("\nEnter the URL to explore: ").strip()
-
-    if not url:
-        print("Error: No URL provided")
-        sys.exit(1)
-
-    if not url.startswith(("http://", "https://")):
-        url = "https://" + url
-
-    user_id = sys.argv[2] if len(sys.argv) > 2 else USER_ID
-
-    tracker = BrowserTracker(user_id=user_id)
-    tracker.start(url)
-
-
-if __name__ == "__main__":
-    main()

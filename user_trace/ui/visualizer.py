@@ -97,5 +97,4 @@ def visualize_knowledge_graph(graph: nx.DiGraph, output_dir: str):
     print(f"  {colored('KNOWLEDGE GRAPH IMAGE SAVED TO:', Colors.YELLOW + Colors.BOLD)}")
     print(f"    {colored(graph_image_path, Colors.GREEN)}")
 
-    # Show the graph
     plt.show()
