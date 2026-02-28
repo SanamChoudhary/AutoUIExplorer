@@ -1,5 +1,5 @@
 """
-AutoUIExplorer – Browser Navigation Tracker
+AutoUIExplorer - Browser Navigation Tracker
 
 Usage:
   python main.py --track [URL]   → Track a website  
@@ -13,7 +13,7 @@ import os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 
-def run_tracker(url: str):
+def main(url: str):
     """Launch the browser tracker to explore a website."""
     from user_trace.tracker.browser import BrowserTracker
     
@@ -54,6 +54,6 @@ if __name__ == "__main__":
     elif "--track" in sys.argv:
         idx = sys.argv.index("--track")
         url = sys.argv[idx + 1] if idx + 1 < len(sys.argv) else None
-        run_tracker(url)
+        main(url)
     else:
         print_help()
