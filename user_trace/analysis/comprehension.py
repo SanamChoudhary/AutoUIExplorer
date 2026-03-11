@@ -1,8 +1,7 @@
 """
 Comprehension scoring based on navigation patterns.
 
-Assigns a human-readable comprehension level (Novice → Expert) from
-simple visit / path count thresholds.
+** NOTE: This is a very basic heuristic model for demonstration purposes.
 """
 
 

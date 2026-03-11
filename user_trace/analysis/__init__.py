@@ -1,1 +1,0 @@
-from user_trace.analysis.comprehension import calculate_comprehension

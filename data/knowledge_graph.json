@@ -4,52 +4,46 @@
       "id": "home",
       "name": "Home",
       "url": "https://books.toscrape.com/index.html",
+      "visits": 2
+    },
+    {
+      "id": "travel_2",
+      "name": "Travel 2",
+      "url": "https://books.toscrape.com/catalogue/category/books/travel_2/index.html",
       "visits": 1
     },
     {
-      "id": "crime_51",
-      "name": "Crime 51",
-      "url": "https://books.toscrape.com/catalogue/category/books/crime_51/index.html",
+      "id": "mystery_3",
+      "name": "Mystery 3",
+      "url": "https://books.toscrape.com/catalogue/category/books/mystery_3/index.html",
       "visits": 1
     },
     {
-      "id": "the_long_shadow_of_small_ghosts_murder_and_memory_in_an_american_city_848",
-      "name": "The Long Shadow Of Small Ghosts Murder And Memory In An American City 848",
-      "url": "https://books.toscrape.com/catalogue/the-long-shadow-of-small-ghosts-murder-and-memory-in-an-american-city_848/index.html",
-      "visits": 1
-    },
-    {
-      "id": "equal_is_unfair_americas_misguided_fight_against_income_inequality_617",
-      "name": "Equal Is Unfair Americas Misguided Fight Against Income Inequality 617",
-      "url": "https://books.toscrape.com/catalogue/equal-is-unfair-americas-misguided-fight-against-income-inequality_617/index.html",
-      "visits": 1
-    },
-    {
-      "id": "eat_fat_get_thin_688",
-      "name": "Eat Fat Get Thin 688",
-      "url": "https://books.toscrape.com/catalogue/eat-fat-get-thin_688/index.html",
+      "id": "historical_fiction_4",
+      "name": "Historical Fiction 4",
+      "url": "https://books.toscrape.com/catalogue/category/books/historical-fiction_4/index.html",
       "visits": 1
     }
   ],
   "edges": [
     {
       "from": "home",
-      "to": "crime_51",
+      "to": "travel_2",
       "count": 1
     },
     {
-      "from": "crime_51",
-      "to": "the_long_shadow_of_small_ghosts_murder_and_memory_in_an_american_city_848",
+      "from": "travel_2",
+      "to": "mystery_3",
       "count": 1
     },
     {
-      "from": "the_long_shadow_of_small_ghosts_murder_and_memory_in_an_american_city_848",
-      "to": "equal_is_unfair_americas_misguided_fight_against_income_inequality_617",
+      "from": "mystery_3",
+      "to": "historical_fiction_4",
       "count": 1
     },
     {
-      "from": "equal_is_unfair_americas_misguided_fight_against_income_inequality_617",
-      "to": "eat_fat_get_thin_688",
+      "from": "historical_fiction_4",
+      "to": "home",
       "count": 1
     }
   ]
