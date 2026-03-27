@@ -1,0 +1,59 @@
+
+Doc Parser Guide
+================
+
+What It Does
+------------
+doc_parser.py crawls a given GitHub documentation URL using Playwright
+(headless Chromium), extracts step-by-step procedural tasks from the
+pages, and outputs a benchmark JSON file (github_benchmark.json).
+
+You provide any GitHub documentation URL and a page limit; the parser
+discovers linked pages within that doc tree, extracts tasks, and returns
+the benchmark JSON. No hardcoded site list is needed.
+
+This benchmark provides ground-truth data for evaluating the adaptive
+onboarding recommendation system. Each task represents something a real
+user would need to accomplish (e.g., "Create a new repository") along
+with the exact sequence of UI actions required.
+
+
+What It Returns
+---------------
+A JSON file containing a array of tasks:
+
+  [
+    {
+      "task_id": "GH-001",
+      "category": "repository",
+      "user_intent": "Creating a new repository",
+      "expected_path": [
+        {
+          "step": 1,
+          "action": "click",
+          "target": "+",
+          "full_instruction": "Click the + icon in the top-right corner"
+        },
+        ...
+      ],
+      "onboarding_hint": "Click the + icon in the top-right corner",
+      "ground_truth_clicks": 5,
+      "source": "documentation",
+      "source_url": "https://docs.github.com/en/..."
+    },
+    ...
+  ]
+
+
+How to Run
+----------
+  # Parse repositories docs (up to 50 pages by default)
+  python benchmark/doc_parser.py https://docs.github.com/en/repositories
+
+  # Parse actions docs with a higher page limit
+  python benchmark/doc_parser.py https://docs.github.com/en/actions --limit 100
+
+  # Custom output filename
+  python benchmark/doc_parser.py https://docs.github.com/en/issues --output issues_benchmark.json
+
+Output is written to: benchmark/<output_filename>

@@ -1,0 +1,447 @@
+[
+  {
+    "task_id": "GH-001",
+    "category": "getting_started",
+    "user_intent": "Creating an account on GitHub - Signing up for a new personal account",
+    "expected_path": [
+      {
+        "step": 1,
+        "action": "navigate",
+        "target": "Navigate to https://github.com/ .",
+        "full_instruction": "Navigate to https://github.com/ ."
+      },
+      {
+        "step": 2,
+        "action": "click",
+        "target": "Sign up",
+        "full_instruction": "Click Sign up ."
+      },
+      {
+        "step": 3,
+        "action": "click",
+        "target": "Continue with Google",
+        "full_instruction": "Alternatively, click on Continue with Google to sign up using social login."
+      },
+      {
+        "step": 4,
+        "action": "create",
+        "target": "Follow the prompts to create your personal account.",
+        "full_instruction": "Follow the prompts to create your personal account."
+      }
+    ],
+    "onboarding_hint": "Navigate to https://github.com/ .",
+    "ground_truth_clicks": 4,
+    "source": "documentation",
+    "source_url": "https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github"
+  },
+  {
+    "task_id": "GH-002",
+    "category": "getting_started",
+    "user_intent": "Hello World - Step 1: Create a repository",
+    "expected_path": [
+      {
+        "step": 1,
+        "action": "click",
+        "target": "New repository",
+        "full_instruction": "In the upper-right corner of any page, select , then click New repository ."
+      },
+      {
+        "step": 2,
+        "action": "fill",
+        "target": "hello-world",
+        "full_instruction": "In the \"Repository name\" box, type hello-world ."
+      },
+      {
+        "step": 3,
+        "action": "fill",
+        "target": "Description",
+        "full_instruction": "In the \"Description\" box, type a short description. For example, type \"This repository is for practicing the GitHub Flow.\""
+      },
+      {
+        "step": 4,
+        "action": "select",
+        "target": "Public",
+        "full_instruction": "Select whether your repository will be Public or Private ."
+      },
+      {
+        "step": 5,
+        "action": "select",
+        "target": "Add a README file",
+        "full_instruction": "Select Add a README file ."
+      },
+      {
+        "step": 6,
+        "action": "click",
+        "target": "Create repository",
+        "full_instruction": "Click Create repository ."
+      }
+    ],
+    "onboarding_hint": "In the upper-right corner of any page, select , then click New repository .",
+    "ground_truth_clicks": 6,
+    "source": "documentation",
+    "source_url": "https://docs.github.com/en/get-started/start-your-journey/hello-world"
+  },
+  {
+    "task_id": "GH-003",
+    "category": "getting_started",
+    "user_intent": "Hello World - Creating a branch",
+    "expected_path": [
+      {
+        "step": 1,
+        "action": "click",
+        "target": "Code",
+        "full_instruction": "Click the Code tab of your hello-world repository."
+      },
+      {
+        "step": 2,
+        "action": "click",
+        "target": "main",
+        "full_instruction": "Above the file list, click the dropdown menu that says main ."
+      },
+      {
+        "step": 3,
+        "action": "fill",
+        "target": "readme-edits",
+        "full_instruction": "Type a branch name, readme-edits , into the text box."
+      },
+      {
+        "step": 4,
+        "action": "click",
+        "target": "Create branch: readme-edits from main",
+        "full_instruction": "Click Create branch: readme-edits from main ."
+      }
+    ],
+    "onboarding_hint": "Click the Code tab of your hello-world repository.",
+    "ground_truth_clicks": 4,
+    "source": "documentation",
+    "source_url": "https://docs.github.com/en/get-started/start-your-journey/hello-world"
+  },
+  {
+    "task_id": "GH-004",
+    "category": "getting_started",
+    "user_intent": "Hello World - Step 3: Make and commit changes",
+    "expected_path": [
+      {
+        "step": 1,
+        "action": "click",
+        "target": "readme-edits",
+        "full_instruction": "Under the readme-edits branch you created, click the README.md file."
+      },
+      {
+        "step": 2,
+        "action": "click",
+        "target": "To edit the file, click .",
+        "full_instruction": "To edit the file, click ."
+      },
+      {
+        "step": 3,
+        "action": "interact",
+        "target": "In the editor, write a bit about yourself.",
+        "full_instruction": "In the editor, write a bit about yourself."
+      },
+      {
+        "step": 4,
+        "action": "click",
+        "target": "Commit changes",
+        "full_instruction": "Click Commit changes ."
+      },
+      {
+        "step": 5,
+        "action": "interact",
+        "target": "Commit changes",
+        "full_instruction": "In the \"Commit changes\" box, write a commit message that describes your changes."
+      },
+      {
+        "step": 6,
+        "action": "click",
+        "target": "Commit changes",
+        "full_instruction": "Click Commit changes ."
+      }
+    ],
+    "onboarding_hint": "Under the readme-edits branch you created, click the README.md file.",
+    "ground_truth_clicks": 6,
+    "source": "documentation",
+    "source_url": "https://docs.github.com/en/get-started/start-your-journey/hello-world"
+  },
+  {
+    "task_id": "GH-005",
+    "category": "getting_started",
+    "user_intent": "Hello World - Step 4: Open a pull request",
+    "expected_path": [
+      {
+        "step": 1,
+        "action": "click",
+        "target": "Pull requests",
+        "full_instruction": "Click the Pull requests tab of your hello-world repository."
+      },
+      {
+        "step": 2,
+        "action": "click",
+        "target": "New pull request",
+        "full_instruction": "Click New pull request ."
+      },
+      {
+        "step": 3,
+        "action": "select",
+        "target": "Example Comparisons",
+        "full_instruction": "In the Example Comparisons box, select the branch you made, readme-edits , to compare with main (the original)."
+      },
+      {
+        "step": 4,
+        "action": "click",
+        "target": "Create pull request",
+        "full_instruction": "Click Create pull request ."
+      },
+      {
+        "step": 5,
+        "action": "click",
+        "target": "Create pull request",
+        "full_instruction": "Click Create pull request ."
+      }
+    ],
+    "onboarding_hint": "Click the Pull requests tab of your hello-world repository.",
+    "ground_truth_clicks": 5,
+    "source": "documentation",
+    "source_url": "https://docs.github.com/en/get-started/start-your-journey/hello-world"
+  },
+  {
+    "task_id": "GH-006",
+    "category": "getting_started",
+    "user_intent": "Hello World - Step 5: Merge your pull request",
+    "expected_path": [
+      {
+        "step": 1,
+        "action": "click",
+        "target": "Merge pull request",
+        "full_instruction": "At the bottom of the pull request, click Merge pull request to merge the changes into main ."
+      },
+      {
+        "step": 2,
+        "action": "click",
+        "target": "Confirm merge",
+        "full_instruction": "Click Confirm merge . You will receive a message that the request was successfully merged and the request was closed."
+      },
+      {
+        "step": 3,
+        "action": "click",
+        "target": "Delete branch",
+        "full_instruction": "Click Delete branch . Now that your pull request is merged and your changes are on main , you can safely delete the readme-edits branch. If you want to make more changes to your project, you can always create a new branch and repeat this process."
+      },
+      {
+        "step": 4,
+        "action": "click",
+        "target": "Code",
+        "full_instruction": "Click back to the Code tab of your hello-world repository to see your published changes on main ."
+      }
+    ],
+    "onboarding_hint": "At the bottom of the pull request, click Merge pull request to merge the changes into main .",
+    "ground_truth_clicks": 4,
+    "source": "documentation",
+    "source_url": "https://docs.github.com/en/get-started/start-your-journey/hello-world"
+  },
+  {
+    "task_id": "GH-007",
+    "category": "getting_started",
+    "user_intent": "Setting up your profile - Adding a profile picture",
+    "expected_path": [
+      {
+        "step": 1,
+        "action": "click",
+        "target": "Settings",
+        "full_instruction": "In the upper-right corner of any page, click your existing profile avatar, then, from the dropdown menu, click Settings ."
+      },
+      {
+        "step": 2,
+        "action": "click",
+        "target": "Edit",
+        "full_instruction": "Under \"Profile Picture\", select Edit , then click Upload a photo... ."
+      },
+      {
+        "step": 3,
+        "action": "click",
+        "target": "Upload",
+        "full_instruction": "Select an image, then click Upload ."
+      },
+      {
+        "step": 4,
+        "action": "click",
+        "target": "Set new profile picture",
+        "full_instruction": "Click Set new profile picture ."
+      }
+    ],
+    "onboarding_hint": "In the upper-right corner of any page, click your existing profile avatar, then, from the dropdown menu, click Settings .",
+    "ground_truth_clicks": 4,
+    "source": "documentation",
+    "source_url": "https://docs.github.com/en/get-started/start-your-journey/setting-up-your-profile"
+  },
+  {
+    "task_id": "GH-008",
+    "category": "getting_started",
+    "user_intent": "Setting up your profile - Adding a bio",
+    "expected_path": [
+      {
+        "step": 1,
+        "action": "click",
+        "target": "Edit profile",
+        "full_instruction": "On your profile page, under your profile picture, click Edit profile ."
+      },
+      {
+        "step": 2,
+        "action": "interact",
+        "target": "Bio",
+        "full_instruction": "Under \"Bio\", write one or two sentences about yourself, such as who you are and what you do. Note Keep the bio short; we'll add a longer description of your interests in your profile README in the section below."
+      },
+      {
+        "step": 3,
+        "action": "add",
+        "target": "Bio",
+        "full_instruction": "To add an emoji to your bio, visit Emoji cheat sheet and copy and paste an emoji into the \"Bio\" dialog box."
+      },
+      {
+        "step": 4,
+        "action": "add",
+        "target": "Optionally, add your preferred pronouns, workplace, location",
+        "full_instruction": "Optionally, add your preferred pronouns, workplace, location and timezone, and any links to your personal website and social accounts. Your pronouns will only be visible to users that are signed in to GitHub."
+      },
+      {
+        "step": 5,
+        "action": "click",
+        "target": "Save",
+        "full_instruction": "Click Save ."
+      }
+    ],
+    "onboarding_hint": "On your profile page, under your profile picture, click Edit profile .",
+    "ground_truth_clicks": 5,
+    "source": "documentation",
+    "source_url": "https://docs.github.com/en/get-started/start-your-journey/setting-up-your-profile"
+  },
+  {
+    "task_id": "GH-009",
+    "category": "getting_started",
+    "user_intent": "Setting up your profile - Step 1: Create a new repository for your profile README",
+    "expected_path": [
+      {
+        "step": 1,
+        "action": "click",
+        "target": "New repository",
+        "full_instruction": "In the upper-right corner of any page, select , then click New repository ."
+      },
+      {
+        "step": 2,
+        "action": "fill",
+        "target": "Repository name",
+        "full_instruction": "Under \"Repository name\", type a repository name that matches your GitHub username. For example, if your username is \"octocat\", the repository name must be \"octocat.\""
+      },
+      {
+        "step": 3,
+        "action": "fill",
+        "target": "Description",
+        "full_instruction": "Optionally, in the \"Description\" field, type a description of your repository. For example, \"My personal repository.\""
+      },
+      {
+        "step": 4,
+        "action": "select",
+        "target": "Public",
+        "full_instruction": "Select Public ."
+      },
+      {
+        "step": 5,
+        "action": "toggle",
+        "target": "Add README",
+        "full_instruction": "Toggle Add README to On ."
+      },
+      {
+        "step": 6,
+        "action": "click",
+        "target": "Create repository",
+        "full_instruction": "Click Create repository ."
+      }
+    ],
+    "onboarding_hint": "In the upper-right corner of any page, select , then click New repository .",
+    "ground_truth_clicks": 6,
+    "source": "documentation",
+    "source_url": "https://docs.github.com/en/get-started/start-your-journey/setting-up-your-profile"
+  },
+  {
+    "task_id": "GH-010",
+    "category": "getting_started",
+    "user_intent": "Setting up your profile - Step 2: Edit theREADME.mdfile",
+    "expected_path": [
+      {
+        "step": 1,
+        "action": "click",
+        "target": "Click the next to your profile README.",
+        "full_instruction": "Click the next to your profile README."
+      },
+      {
+        "step": 2,
+        "action": "interact",
+        "target": "### Hi there",
+        "full_instruction": "In the \"Edit\" view, you'll see some pre-populated text to get you started. On line 1, delete the text that says ### Hi there and type # About me . In Markdown syntax, ### renders the plain text as a small (\"third-level\") heading, while ## or # renders a second- and first-level heading respectively."
+      },
+      {
+        "step": 3,
+        "action": "toggle",
+        "target": "Preview",
+        "full_instruction": "Toggle to \"Preview\" to see how the plain text now renders. You should see the new text displayed as a much larger heading."
+      },
+      {
+        "step": 4,
+        "action": "toggle",
+        "target": "Edit",
+        "full_instruction": "Toggle back to the \"Edit\" view."
+      },
+      {
+        "step": 5,
+        "action": "delete",
+        "target": "<!--",
+        "full_instruction": "Delete line 3 and line 16. This HTML syntax (e.g. <!-- ) is keeping the other lines hidden when you toggle to \"Preview\"."
+      },
+      {
+        "step": 6,
+        "action": "delete",
+        "target": "Complete some of the prompts on lines 8 to 15, and delete an",
+        "full_instruction": "Complete some of the prompts on lines 8 to 15, and delete any lines you don't want. For example, add your interests, skills, hobbies, or a fun fact about yourself."
+      },
+      {
+        "step": 7,
+        "action": "toggle",
+        "target": "Preview",
+        "full_instruction": "Now, toggle to \"Preview\". You should see your completed prompts render as a bulleted list."
+      },
+      {
+        "step": 8,
+        "action": "toggle",
+        "target": "Edit",
+        "full_instruction": "Toggle back to \"Edit\" and remove any other lines of text that you don't want displayed on your profile."
+      }
+    ],
+    "onboarding_hint": "Click the next to your profile README.",
+    "ground_truth_clicks": 8,
+    "source": "documentation",
+    "source_url": "https://docs.github.com/en/get-started/start-your-journey/setting-up-your-profile"
+  },
+  {
+    "task_id": "GH-011",
+    "category": "getting_started",
+    "user_intent": "Setting up your profile - Step 3: Publish your changes to your profile",
+    "expected_path": [
+      {
+        "step": 1,
+        "action": "click",
+        "target": "Commit changes",
+        "full_instruction": "In the open dialog box, simply click again Commit changes ."
+      },
+      {
+        "step": 2,
+        "action": "navigate",
+        "target": "Navigate back to your profile page. You will see your new pr",
+        "full_instruction": "Navigate back to your profile page. You will see your new profile README displayed on your profile."
+      }
+    ],
+    "onboarding_hint": "In the open dialog box, simply click again Commit changes .",
+    "ground_truth_clicks": 2,
+    "source": "documentation",
+    "source_url": "https://docs.github.com/en/get-started/start-your-journey/setting-up-your-profile"
+  }
+]

@@ -1,0 +1,124 @@
+
+The benchmark is composed of three levels of tasks (L1, L2, L3).
+This script explores L1, the atomic tasks, which is the original
+benchmark introduced in the WorkArena paper and what they based their
+agent evaluation on.
+
+L1 consists of 33 task types and 19,912 unique instances built on 
+the ServiceNow enterprise platform. Each task type (e.g. CreateUser) 
+has many unique instances with different values filled in 
+(e.g. different names, emails, priorities), so that an AI agent 
+cannot simply memorize answers and must truly understand the task.
+
+The 33 tasks are grouped into 6 categories:
+    - Lists (12 tasks): filtering and sorting data tables
+    - Forms (5 tasks): creating new entries in data tables
+    - Knowledge Base (1 task): searching for specific information
+    - Service Catalogs (9 tasks): ordering items with specifications
+    - Menus (2 tasks): navigating the platform and impersonating users
+    - Dashboards (4 tasks): extracting data from charts
+
+This script exports all L1 tasks and their instances to a text file
+called all_instances.txt so they can be browsed and understood before
+running the benchmark with an AI agent.
+
+IMPORTANT — Understanding the 19,912 Instances:
+-------------------------------------------------
+The 19,912 instances do NOT exist as a fixed static list.
+Instead, they are generated on the fly each time a task runs
+by randomly sampling different parameter combinations
+(e.g. different names, values, filters). This means:
+
+    - You cannot see all 19,912 instances statically — there is
+      no master list to look up, they are created at runtime
+
+    - Every time you run a task, it picks a random unique 
+      combination of values (e.g. a different name, email, 
+      priority level, or filter condition each time)
+
+    - This is what makes the benchmark robust — because instances
+      are randomly generated, an AI agent truly cannot memorize 
+      answers. It must genuinely understand and reason through 
+      each task from scratch every time it runs
+
+BrowserGym vs WorkArena — What Opens and What Controls What
+=============================================================
+When you run this demo, two things visually appear on your screen.
+Both are opened and controlled by BrowserGym, a general purpose
+framework for running web agents in a real Chrome browser.
+
+WHAT OPENS ON YOUR SCREEN:
+----------------------------
+BrowserGym physically opens two windows side by side:
+
+    LEFT SIDE — Chat Window:
+        - Shows the task goal as a user message
+        - The agent can send messages here via send_msg_to_user()
+        - This is how retrieval tasks (dashboards, knowledge base)
+          get their answers validated
+        - Controlled via env.chat.add_message()
+
+    RIGHT SIDE — Browser Window:
+        - A real Chrome browser controlled by Playwright
+        - Opens directly to the relevant ServiceNow page for the task
+        - The agent interacts with it via clicks, typing, scrolling
+        - Controlled via env.step(action)
+
+WHAT CONTROLS WHAT:
+--------------------
+    BrowserGym  → opens the browser and chat, executes actions,
+                  returns observations, tracks reward and done state
+    WorkArena   → provides the specific task goal, starting page,
+                  and validation logic (did the agent succeed?)
+    The Agent   → decides what actions to take based on observations
+
+
+HuggingFace Setup Process for WorkArena
+=========================================
+The WorkArena team has pre-configuredServiceNow instances on HuggingFace. 
+Instead of setting up your own ServiceNow instance, WorkArena now automatically 
+borrows a pre-configured instance from HuggingFace every time you run a task.
+
+THE SETUP PROCESS I FOLLOWED:
+--------------------------------
+Step 1 — Request Access to the Gated Repository:
+    - Navigate to:
+      https://huggingface.co/datasets/ServiceNow/WorkArena-Instances
+    - Fill out the access request form
+    - Accept the terms and conditions
+    - Wait for approval from the WorkArena team
+    - Once approved, your HuggingFace account has access to the
+      pre-configured ServiceNow instances
+
+Step 2 — Install the HuggingFace CLI:
+    - Run: pip install huggingface_hub
+    - This installs the HuggingFace command line tools on your machine
+    - These tools allow your machine to authenticate with HuggingFace
+      and download gated datasets that you have been approved for
+
+Step 3 — Generate a HuggingFace Access Token:
+    - Go to huggingface.co and log in
+    - Navigate to Settings → Access Tokens
+    - Click "New Token"
+    - Name it something like "workarena-demo"
+    - Select "Read" as the token type (read access is all you need
+      since you are only downloading instances, not uploading)
+
+Step 4 — Log In to HuggingFace on Your Machine:
+    - Run: huggingface-cli login
+    - Paste your token when prompted
+    - Select "No" when asked to add token as git credential
+      (you only need it for HuggingFace access, not for Git)
+    - You should see: "Login successful"
+
+Step 5 — Install WorkArena and Playwright:
+    - Run: pip install browsergym-workarena
+    - Run: playwright install
+    - These install BrowserGym, WorkArena, and the Chrome browser
+      that BrowserGym uses to run the benchmark tasks
+
+Step 6 — Run the Demo:
+    - Run: python demo_l1.py
+    - WorkArena automatically fetches a pre-configured ServiceNow
+      instance from HuggingFace using your saved token
+    - A browser window opens and the benchmark tasks begin running
