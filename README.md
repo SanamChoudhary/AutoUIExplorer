@@ -1,10 +1,10 @@
 # AutoUIExplorer
 
-**Real-time browser navigation tracker with knowledge graph visualization**
+**Software for Adaptive Onboarding in Complex SaaS Interfaces**
 
 ---
 
-## What It Does
+## What It Does (Currently)
 
 AutoUIExplorer is a toolkit for studying how users (and AI agents) interact with web UIs. It has three main components:
 
@@ -61,19 +61,6 @@ python benchmark/doc_parser.py https://docs.github.com/en/repositories --limit 2
 3. **Post-process** — Assign sequential IDs (`GH-001`, `GH-002`, …).
 4. **Write** — Output JSON to `--output` (default: `benchmark/github_benchmark.json`).
 
-### Output schema (per task)
-| Field | Description |
-|-------|-------------|
-| `task_id` | Sequential ID (e.g. `GH-001`) |
-| `category` | Semantic category inferred from URL (e.g. `repository`, `collaboration`) |
-| `user_intent` | What the user wants to accomplish |
-| `expected_path` | Ordered steps with `action`, `target`, and `instruction` |
-| `onboarding_hint` | Context for first-time users |
-| `ground_truth_clicks` | Number of steps |
-| `source_url` | Documentation page the task was extracted from |
-
-A pre-generated benchmark is included at `benchmark/github_benchmark.json`.
-
 ---
 
 ## WorkArena Demo
@@ -109,42 +96,6 @@ See `WorkArena_demo/information.txt` for detailed setup instructions and task ca
 After a tracker session, find these in the `data/` folder:
 - `knowledge_graph.json` — Graph data (nodes & edges)
 - `knowledge_graph.png` — Graph visualization image
-
-
-## Project Structure
-
-```
-├── main.py                          # Entry point — CLI args, launches tracker
-├── requirements.txt                 # Python dependencies
-├── data/                            # Output (auto-generated)
-│   ├── knowledge_graph.json         #   Graph data (nodes & edges)
-│   └── knowledge_graph.png          #   Graph visualization image
-├── user_trace/                      # Core navigation tracking package
-│   ├── __init__.py
-│   ├── tracker/
-│   │   ├── browser.py               #   Orchestrator — launches Chromium, wires events
-│   │   └── event_collector.py       #   Filters, deduplicates & records navigations
-│   ├── graph/
-│   │   ├── knowledge_graph.py       #   Directed graph model (NetworkX) + JSON export
-│   │   └── url_utils.py             #   URL normalization & feature-ID helpers
-│   ├── analysis/
-│   │   └── comprehension.py         #   Comprehension-level scoring (Novice → Expert)
-│   └── ui/
-│       ├── console.py               #   ANSI color helpers & flush-safe logging
-│       └── visualizer.py            #   Matplotlib graph rendering & PNG export
-├── benchmark/                       # Documentation → benchmark pipeline
-│   ├── doc_parser.py                #   CLI entry point for the crawl/parse pipeline
-│   ├── doc_parser_guide.txt         #   Human-readable guide for the parser
-│   ├── github_benchmark.json        #   Pre-generated benchmark output
-│   └── parser/
-│       ├── browser.py               #   Headless Chromium fetcher (expands hidden content)
-│       ├── constants.py             #   Action verbs, preamble phrases, category map
-│       ├── discovery.py             #   BFS URL discovery within a doc tree
-│       └── extraction.py            #   Task extraction from HTML ordered lists
-└── WorkArena_demo/                  # BrowserGym/WorkArena agent demo
-    ├── demo_1.py                    #   Runs L1 atomic tasks with cheat validation
-    └── information.txt              #   Setup guide & L1 task category reference
-```
 
 ## Dependencies
 
