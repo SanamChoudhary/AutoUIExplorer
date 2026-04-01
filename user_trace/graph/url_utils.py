@@ -47,6 +47,37 @@ def url_to_feature_id(url: str) -> str:
     return feature_id or "home"
 
 
+def url_to_area(url: str) -> str:
+    """Extract the top-level area / section from a URL path.
+
+    For ``https://example.com/settings/notifications/email`` this
+    returns ``"settings"``.  Used by the recommendation engine to
+    group pages into logical areas.
+    """
+    parsed = urlparse(url)
+    path = parsed.path.strip("/")
+
+    if not path:
+        return "home"
+
+    # Split and drop trivial segments
+    parts = [p for p in path.split("/") if p and p.lower() not in ("index",)]
+
+    # Remove file extensions from each part
+    cleaned: list[str] = []
+    for part in parts:
+        for ext in [".html", ".htm", ".php", ".asp", ".aspx"]:
+            if part.endswith(ext):
+                part = part[: -len(ext)]
+        if part:
+            cleaned.append(part)
+
+    if not cleaned:
+        return "home"
+
+    return cleaned[0].replace("-", "_").lower()
+
+
 def url_to_name(url: str) -> str:
     """Convert a URL path to a human-readable name."""
     parsed = urlparse(url)

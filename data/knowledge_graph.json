@@ -7,42 +7,53 @@
       "visits": 2
     },
     {
-      "id": "travel_2",
-      "name": "Travel 2",
-      "url": "https://books.toscrape.com/catalogue/category/books/travel_2/index.html",
-      "visits": 1
-    },
-    {
-      "id": "mystery_3",
-      "name": "Mystery 3",
-      "url": "https://books.toscrape.com/catalogue/category/books/mystery_3/index.html",
-      "visits": 1
-    },
-    {
       "id": "historical_fiction_4",
       "name": "Historical Fiction 4",
       "url": "https://books.toscrape.com/catalogue/category/books/historical-fiction_4/index.html",
+      "visits": 1
+    },
+    {
+      "id": "philosophy_7",
+      "name": "Philosophy 7",
+      "url": "https://books.toscrape.com/catalogue/category/books/philosophy_7/index.html",
+      "visits": 1
+    },
+    {
+      "id": "sophies_world_966",
+      "name": "Sophies World 966",
+      "url": "https://books.toscrape.com/catalogue/sophies-world_966/index.html",
+      "visits": 1
+    },
+    {
+      "id": "alice_in_wonderland_alices_adventures_in_wonderland_1_5",
+      "name": "Alice In Wonderland Alices Adventures In Wonderland 1 5",
+      "url": "https://books.toscrape.com/catalogue/alice-in-wonderland-alices-adventures-in-wonderland-1_5/index.html",
       "visits": 1
     }
   ],
   "edges": [
     {
       "from": "home",
-      "to": "travel_2",
-      "count": 1
-    },
-    {
-      "from": "travel_2",
-      "to": "mystery_3",
-      "count": 1
-    },
-    {
-      "from": "mystery_3",
       "to": "historical_fiction_4",
       "count": 1
     },
     {
       "from": "historical_fiction_4",
+      "to": "philosophy_7",
+      "count": 1
+    },
+    {
+      "from": "philosophy_7",
+      "to": "sophies_world_966",
+      "count": 1
+    },
+    {
+      "from": "sophies_world_966",
+      "to": "alice_in_wonderland_alices_adventures_in_wonderland_1_5",
+      "count": 1
+    },
+    {
+      "from": "alice_in_wonderland_alices_adventures_in_wonderland_1_5",
       "to": "home",
       "count": 1
     }

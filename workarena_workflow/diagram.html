@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WorkArena / BrowserGym — Agentic Workflow</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #ffffff;
+    --surface:   #f6f8fa;
+    --surface2:  #f0f2f5;
+    --border:    #d0d7de;
+    --border2:   #bbc0c7;
+
+    --teal:      #1a8a6e;
+    --teal-dim:  rgba(26,138,110,0.07);
+    --teal-bd:   rgba(26,138,110,0.30);
+
+    --blue:      #2563a8;
+    --blue-dim:  rgba(37,99,168,0.06);
+    --blue-bd:   rgba(37,99,168,0.25);
+
+    --amber:     #9a6e1e;
+    --amber-dim: rgba(154,110,30,0.06);
+    --amber-bd:  rgba(154,110,30,0.25);
+
+    --purple:    #7444b8;
+    --purple-dim:rgba(116,68,184,0.06);
+    --purple-bd: rgba(116,68,184,0.22);
+
+    --green:     #1a7f37;
+    --green-dim: rgba(26,127,55,0.06);
+    --green-bd:  rgba(26,127,55,0.25);
+
+    --coral:     #c4432b;
+    --coral-dim: rgba(196,67,43,0.06);
+    --coral-bd:  rgba(196,67,43,0.22);
+
+    --gray-dim:  rgba(100,110,120,0.07);
+    --gray-bd:   rgba(100,110,120,0.25);
+    --muted:     #636c76;
+    --text:      #1f2328;
+    --text2:     #32383f;
+
+    --radius:    8px;
+    --radius-lg: 14px;
+    --mono:      'IBM Plex Mono', monospace;
+    --sans:      'IBM Plex Sans', sans-serif;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 13px;
+    line-height: 1.5;
+    padding: 40px 24px 60px;
+    min-width: 700px;
+  }
+
+  /* ── Header ── */
+  .header { text-align: center; margin-bottom: 40px; }
+  .header h1 { font-size: 20px; font-weight: 500; letter-spacing: 0.02em; color: var(--text); margin-bottom: 4px; }
+  .header p  { font-size: 12px; color: var(--muted); font-family: var(--mono); }
+
+  /* ── Layout column ── */
+  .diagram { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 0; }
+
+  /* ── Connector arrows ── */
+  .arrow-wrap {
+    display: flex; justify-content: center; align-items: center;
+    height: 36px; position: relative;
+  }
+  .arrow-wrap::before {
+    content: ''; position: absolute; left: 50%; top: 0; bottom: 14px;
+    width: 1px; background: var(--border2); transform: translateX(-50%);
+  }
+  .arrow-wrap::after {
+    content: ''; position: absolute; left: 50%; bottom: 4px;
+    transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 7px solid var(--border2);
+  }
+  .arrow-label { display: none; }
+
+  /* ── Section containers ── */
+  .section { border-radius: var(--radius-lg); border: 1px solid; overflow: hidden; }
+  .section-header {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 16px; border-bottom: 1px solid;
+    font-size: 11px; font-weight: 500; font-family: var(--mono);
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .section-body { padding: 14px 16px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+  .s-gray   { border-color: var(--gray-bd);   background: var(--gray-dim); }
+  .s-gray   .section-header { border-color: var(--gray-bd);   color: var(--muted); }
+  .s-gray   .dot { background: var(--muted); }
+
+  .s-teal   { border-color: var(--teal-bd);   background: var(--teal-dim); }
+  .s-teal   .section-header { border-color: var(--teal-bd);   color: var(--teal); }
+  .s-teal   .dot { background: var(--teal); }
+
+  .s-blue   { border-color: var(--blue-bd);   background: var(--blue-dim); }
+  .s-blue   .section-header { border-color: var(--blue-bd);   color: var(--blue); }
+  .s-blue   .dot { background: var(--blue); }
+
+  .s-amber  { border-color: var(--amber-bd);  background: var(--amber-dim); }
+  .s-amber  .section-header { border-color: var(--amber-bd);  color: var(--amber); }
+  .s-amber  .dot { background: var(--amber); }
+
+  .s-purple { border-color: var(--purple-bd); background: var(--purple-dim); }
+  .s-purple .section-header { border-color: var(--purple-bd); color: var(--purple); }
+  .s-purple .dot { background: var(--purple); }
+
+  .s-green  { border-color: var(--green-bd);  background: var(--green-dim); }
+  .s-green  .section-header { border-color: var(--green-bd);  color: var(--green); }
+  .s-green  .dot { background: var(--green); }
+
+  /* ── Card grid ── */
+  .card-row { display: grid; gap: 10px; }
+  .card-row.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .card-row.cols-6 { grid-template-columns: repeat(6, 1fr); }
+  .card-row.cols-2 { grid-template-columns: repeat(2, 1fr); }
+
+  .card { border-radius: var(--radius); border: 1px solid; padding: 10px 12px; }
+  .card.c-blue   { border-color: var(--blue-bd);   background: rgba(37,99,168,0.04); }
+  .card.c-purple { border-color: var(--purple-bd); background: rgba(116,68,184,0.04); }
+  .card.c-amber  { border-color: var(--amber-bd);  background: rgba(154,110,30,0.04); }
+  .card.c-coral  { border-color: var(--coral-bd);  background: rgba(196,67,43,0.04); }
+  .card.c-green  { border-color: var(--green-bd);  background: rgba(26,127,55,0.04); }
+  .card.c-teal   { border-color: var(--teal-bd);   background: rgba(26,138,110,0.04); }
+  .card.c-gray   { border-color: var(--gray-bd);   background: rgba(100,110,120,0.04); }
+
+  .card-title { font-size: 12px; font-weight: 600; margin-bottom: 5px; color: var(--text); }
+  .card-title.blue   { color: var(--blue); }
+  .card-title.purple { color: var(--purple); }
+  .card-title.amber  { color: var(--amber); }
+  .card-title.coral  { color: var(--coral); }
+  .card-title.green  { color: var(--green); }
+  .card-title.teal   { color: var(--teal); }
+  .card-title.gray   { color: var(--muted); }
+
+  .card-lines { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+  .card-lines li { font-size: 11px; color: var(--muted); font-family: var(--mono); }
+
+  /* ── User node ── */
+  .user-node {
+    align-self: center; display: flex; align-items: center; gap: 10px;
+    border: 1px solid var(--gray-bd); background: var(--gray-dim);
+    border-radius: var(--radius); padding: 10px 20px;
+    width: fit-content; margin: 0 auto;
+  }
+  .user-node .icon {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--surface2); border: 1px solid var(--border2);
+    display: flex; align-items: center; justify-content: center; font-size: 14px;
+  }
+  .user-node .label { font-size: 13px; font-weight: 500; }
+  .user-node .sub   { font-size: 11px; color: var(--muted); font-family: var(--mono); }
+
+  /* ── BrowserGym dashed wrapper ── */
+  .nested { border: 1px dashed var(--teal-bd); border-radius: var(--radius-lg); overflow: hidden; position: relative; }
+  .nested-label {
+    font-size: 10px; font-family: var(--mono); color: var(--teal);
+    letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.7;
+    text-align: right; margin-bottom: 6px;
+  }
+  .nested-inner { padding: 14px; display: flex; flex-direction: column; gap: 0; }
+
+  /* ── Feedback loop ── */
+  .feedback-row {
+    display: flex; align-items: center; gap: 10px; margin-top: 10px;
+    padding: 8px 12px; border-radius: var(--radius);
+    border: 1px dashed var(--border2);
+  }
+  .feedback-row .fb-arrow { font-size: 16px; color: var(--teal); }
+  .feedback-row p { font-size: 11px; color: var(--muted); font-family: var(--mono); }
+
+  /* ── Terminal result ── */
+  .terminal {
+    border: 1px solid var(--border); border-radius: var(--radius);
+    background: var(--surface); padding: 10px 16px;
+    font-family: var(--mono); font-size: 11px; color: var(--muted);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .terminal .prompt { color: var(--green); }
+  .terminal .ok     { color: var(--green); }
+  .terminal .fail   { color: var(--coral); }
+  .terminal .sep    { color: var(--border2); margin: 0 6px; }
+
+  /* ── Sub-label ── */
+  .sub-label {
+    font-size: 10px; font-family: var(--mono); color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px;
+  }
+
+  /* ── Legend ── */
+  .legend { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--muted); font-family: var(--mono); }
+  .legend-swatch { width: 10px; height: 10px; border-radius: 2px; }
+
+  /* footnote */
+  .footnote { font-size: 10px; color: var(--muted); font-family: var(--mono); margin-top: 8px; }
+
+  /* ── Print / PDF ── */
+  @media print {
+    @page { size: A3 portrait; margin: 0; }
+    html, body { width: 100%; height: 100%; margin: 0; padding: 0; min-width: 0; }
+    body { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; font-size: 13px; }
+    .diagram { max-width: 100%; width: 100%; flex: 1; justify-content: space-between; }
+    .header { margin-bottom: 12px; }
+    .header h1 { font-size: 20px; }
+    .arrow-wrap { height: 28px; }
+    .section-body { padding: 12px 14px; }
+    .section-header { padding: 8px 14px; }
+    .card { padding: 8px 10px; }
+    .card-lines li { font-size: 11px; }
+    .card-title { font-size: 12px; margin-bottom: 4px; }
+    .card-row { gap: 8px; }
+    .nested-inner { padding: 12px; }
+    .user-node { padding: 10px 20px; }
+    .feedback-row { margin-top: 8px; padding: 6px 10px; }
+    .legend { margin-top: 16px; gap: 14px; }
+    .footnote { font-size: 10px; }
+    .sub-label { margin-bottom: 6px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>WorkArena / BrowserGym — Agentic Workflow</h1>
+</div>
+
+<div class="diagram">
+
+  <!-- USER -->
+  <div class="user-node">
+    <div class="icon">👤</div>
+    <div>
+      <div class="label">User / Task Goal</div>
+      <div class="sub">Natural-language instruction via chat</div>
+    </div>
+  </div>
+
+  <div class="arrow-wrap"></div>
+
+  <!-- BROWSERGYM WRAPPER -->
+  <span class="nested-label">BrowserGym environment / POMDP</span>
+  <div class="nested">
+    <div class="nested-inner">
+
+      <!-- OBSERVATION SPACE -->
+      <div class="section s-blue">
+        <div class="section-header">
+          <span class="dot"></span>
+          Observation space — assembled per step
+        </div>
+        <div class="section-body">
+          <div class="card-row cols-3">
+            <div class="card c-purple">
+              <div class="card-title purple">AXTree / HTML DOM</div>
+            </div>
+            <div class="card c-purple">
+              <div class="card-title purple">Screenshot</div>
+            </div>
+            <div class="card c-purple">
+              <div class="card-title purple">Chat History + Errors</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="arrow-wrap"></div>
+
+      <!-- LLM AGENT -->
+      <div class="section s-amber">
+        <div class="section-header">
+          <span class="dot"></span>
+          LLM Agent — chain-of-thought prompting
+        </div>
+        <div class="section-body">
+          <div class="card-row cols-3">
+            <div class="card c-coral">
+              <div class="card-title coral">1 · Prompt builder</div>
+              <ul class="card-lines">
+                <li>Goal + AXTree</li>
+                <li>+ action history </li>
+                <li>+ think history </li>
+                <li>+ last error msg </li>
+                <li>+ focused element </li>
+              </ul>
+            </div>
+            <div class="card c-coral">
+              <div class="card-title coral">2 · LLM inference</div>
+              <ul class="card-lines">
+                <li>GPT-4o</li>
+                <li>GPT-3.5</li>
+                <li>Llama3-70b</li>
+                <li>Based on prompt + data, determine best action</li>
+              </ul>
+            </div>
+            <div class="card c-coral">
+              <div class="card-title coral">3 · Parse &amp; retry loop</div>
+              <ul class="card-lines">
+                <li>If response is malformed, retry up to 4×</li>
+              </ul>
+            </div>
+      </div>
+
+      <div class="arrow-wrap"></div>
+
+      <!-- ACTION SPACE -->
+      <div class="section s-blue">
+        <div class="section-header">
+          <span class="dot"></span>
+          Action space
+        </div>
+        <div class="section-body">
+          <div class="card-row cols-2" style="max-width: 500px; margin: 0 auto;">
+            <div class="card c-blue">
+              <div class="card-title blue">bid-based Action</div>
+              <ul class="card-lines">
+                <li>click(bid, button)</li>
+                <li>type(bid, text)</li>
+                <li>hover(bid)</li>
+                <li>select_option(bid, opts)</li>
+                <li>drag_and_drop(a, b)</li>
+                <li>press(bid, key_combo)</li>
+              </ul>
+            </div>
+            <div class="card c-blue">
+              <div class="card-title blue">coord-based Action</div>
+              <ul class="card-lines">
+                <li>mouse_click(x, y)</li>
+                <li>mouse_drag(x1,y1,x2,y2)</li>
+                <li>keyboard_type(text)</li>
+                <li>scroll(dx, dy)</li>
+                <li>go_back() / goto(url)</li>
+                <li>new_tab() / tab_close()</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="arrow-wrap"></div>
+
+      <!-- FEEDBACK LOOP -->
+      <div class="feedback-row">
+        <span class="fb-arrow">↻</span>
+        <p>Browser renders new page state → next observation assembled → step repeats &nbsp;(max 15 steps per episode)</p>
+      </div>
+
+    </div>
+  </div><!-- /nested -->
+
+  <div class="arrow-wrap"></div>
+
+  <!-- WORKARENA BENCHMARK -->
+  <div class="section s-teal">
+    <div class="section-header">
+      <span class="dot"></span>
+      WorkArena benchmark — ServiceNow platform &nbsp;(33 tasks · 19,912 instances)
+    </div>
+    <div class="section-body">
+
+      <p class="sub-label">Task categories</p>
+      <div class="card-row cols-6" style="margin-bottom: 14px;">
+        <div class="card c-green">
+          <div class="card-title green">Lists</div>
+          <ul class="card-lines"><li>12 tasks</li><li>Filter/sort</li><li>6,900 inst.</li></ul>
+        </div>
+        <div class="card c-green">
+          <div class="card-title green">Forms</div>
+          <ul class="card-lines"><li>5 tasks</li><li>Create records</li><li>5,000 inst.</li></ul>
+        </div>
+        <div class="card c-green">
+          <div class="card-title green">Knowledge</div>
+          <ul class="card-lines"><li>1 task</li><li>Search KB</li><li>1,000 inst.</li></ul>
+        </div>
+        <div class="card c-green">
+          <div class="card-title green">Catalogs</div>
+          <ul class="card-lines"><li>9 tasks</li><li>Order items</li><li>3,550 inst.</li></ul>
+        </div>
+        <div class="card c-green">
+          <div class="card-title green">Dashboards</div>
+          <ul class="card-lines"><li>4 tasks</li><li>Read charts</li><li>1,862 inst.</li></ul>
+        </div>
+        <div class="card c-green">
+          <div class="card-title green">Menus</div>
+          <ul class="card-lines"><li>2 tasks</li><li>Navigate</li><li>1,600 inst.</li></ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+</div><!-- /diagram -->
+
+</body>
+</html>

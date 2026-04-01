@@ -27,3 +27,23 @@ def colored(text: str, color: str) -> str:
 def log(message: str = ""):
     """Print with immediate flush for real-time output."""
     print(message, flush=True)
+
+
+def log_recommendations(recommendations) -> None:
+    """Display a styled list of next-step recommendations.
+
+    Args:
+        recommendations: Iterable of objects with *label*, *reason*,
+            and *score* attributes (e.g. ``Recommendation``).
+    """
+    recs = list(recommendations)
+    if not recs:
+        return
+
+    log(colored("  ┌─ SUGGESTED NEXT ", Colors.YELLOW) + colored("─" * 40, Colors.YELLOW))
+    for i, rec in enumerate(recs, 1):
+        # Truncate long labels
+        label = rec.label[:42] if len(rec.label) > 42 else rec.label
+        reason = rec.reason
+        log(f"  {colored('│', Colors.YELLOW)}  {colored(str(i) + '.', Colors.BOLD)} {label}  {colored('(' + reason + ')', Colors.CYAN)}")
+    log(colored("  └" + "─" * 57, Colors.YELLOW))

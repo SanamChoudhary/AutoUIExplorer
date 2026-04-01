@@ -25,22 +25,26 @@ class EventCollector:
         self.visited_urls: set[str] = set()
         self.navigation_history: list[dict] = []
 
-    def on_navigation(self, raw_url: str):
+    def on_navigation(self, raw_url: str) -> bool:
         """Process a navigation event for the given URL.
 
         Normalizes the URL, skips duplicates and external domains, then
         records the visit in the knowledge graph and navigation history.
+
+        Returns:
+            ``True`` if the navigation was recorded, ``False`` if it
+            was skipped (duplicate or external domain).
         """
         url = normalize_url(raw_url)
 
         # Skip if same URL
         if url == self.current_url:
-            return
+            return False
 
         # Skip external domains
         if not is_same_domain(url, self.base_domain):
             log(f"  {colored('[SKIP]', Colors.RED)} External: {url[:50]}...")
-            return
+            return False
 
         # Track navigation
         is_new = url not in self.visited_urls
@@ -63,6 +67,8 @@ class EventCollector:
 
         # Log to terminal
         self._log_navigation(url, is_new)
+
+        return True
 
     def _log_navigation(self, url: str, is_new: bool):
         """Log navigation to terminal in real-time."""
